@@ -1,0 +1,13 @@
+[{
+    "name": "Hotel Condado Barcelona",
+    "url": "https://www.condadohotel.com/",
+    "scriptName": "condado",
+    "selectors": {
+        "infoPopUp": "#popmake-3473 > button",
+        "checkIn": "#datein",
+        "checkOut": "#dateout",
+        "guests": "#adults",
+        "bookInButton": "#bookingBtn",
+        "infoList": "wbkv9-Entity-name"
+    }
+}]
