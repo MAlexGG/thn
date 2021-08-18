@@ -23,8 +23,15 @@ module.exports = async(page, website) => {
     let checkOutDate = await page.evaluate(el => el.value, checkOut[0]);
     console.log(checkOutDate);
 
+    await page.waitForXPath("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[1]/div/select");
+    let adults = await page.$x("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[1]/div/select");
+    let adultsGuests = await page.evaluate(el => el.value, adults[0]);
+    console.log(adultsGuests);
 
-
+    await page.waitForXPath("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[2]/div/select");
+    let children = await page.$x("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[2]/div/select");
+    let childrenGuests = await page.evaluate(el => el.value, children[0]);
+    console.log(childrenGuests);
 
     await page.waitForSelector(selectors.rates);
     await page.evaluate(() => {
