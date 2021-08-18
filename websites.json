@@ -1,13 +1,16 @@
 [{
-    "name": "Hotel Condado Barcelona",
-    "url": "https://www.condadohotel.com/",
-    "scriptName": "condado",
+    "name": "Hotel Arcotel",
+    "url": "https://www.secure-hotel-booking.com/smart/Star-Champs-Elysees/2YXB/es/",
+    "scriptName": "arcotel",
     "selectors": {
-        "infoPopUp": "#popmake-3473 > button",
-        "checkIn": "#datein",
-        "checkOut": "#dateout",
-        "guests": "#adults",
-        "bookInButton": "#bookingBtn",
-        "infoList": "wbkv9-Entity-name"
+        "checkIn": "input.check-in-datepicker",
+        "checkOut": "input.check-out-datepicker",
+        "adultsGuests": "select#adults",
+        "childrenGuests": "select#children",
+        "bookInButton": "#applicationHost > div > div.page-background > div.page-main.page-host > header > div.change-filters > div > p > a",
+        "dates": ".filters-date",
+        "rates": ".room-rates-item-price-moy",
+        "extras": ".room-rates-item-title-meal-plan",
+        "refundable": ".room-rates-item-info-text"
     }
 }]

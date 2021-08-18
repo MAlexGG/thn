@@ -9,53 +9,29 @@ module.exports = async(page, website) => {
     const bookIn = await page.$(selectors.bookInButton);
     await bookIn.evaluate(bookIn => bookIn.click());
 
-    // await page.waitForSelector(selectors.infoList);
+    const language = await page.evaluate(() => {
+        const code = document.querySelector('html').lang;
+        return code;
+    });
+    console.log(language);
 
+    await page.waitForSelector(selectors.infoContainer);
+    await page.evaluate((infoContainer) => {
+        const infoContainerAll = document.querySelectorAll(infoContainer);
+        for (const item of infoContainerAll) {
+            console.log(item.innerText);
+        }
+    }, selectors.infoContainer);
 
-    // const room = await page.evaluate(() => {
-    //     const roomText = document.querySelectorAll(".wbkv9-Entity-name");
-    //     const rooms = [];
-    //     roomText.forEach(item => {
-    //         rooms.push(item.innerText);
-    //     })
-    //     return rooms;
+    // await page.evaluate(() => {
+    //     const rooms = document.querySelectorAll('html');
+    //     console.log(rooms.innerText);
+    // let newArray = [];
+    // rooms.forEach(item => {
+    //     newArray.push(item.innerText)
     // });
-    // console.log(room);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // const roomText = await page.evaluate((a) => {
-    //     const roomList = document.querySelectorAll(a);
-    //     const roomText = [];
-    //     for (const room of roomList) {
-    //         roomText.push(room.innerText);
-    //     }
-    //     return roomText;
+    // console.log(newArray);
     // });
-    // console.log(roomText);
-
-
-
-    // const rooms = await page.evaluateHandle(() => {
-    //     return Array.from(document.querySelectorAll('.wbkv9-Entity-name'));
-    // });
-    // await rooms.evaluate(() => {
-    //     console.log(rooms.length);
-    // })
-
-    // console.log(rooms);
-
 
 
 };
