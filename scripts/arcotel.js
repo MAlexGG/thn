@@ -13,23 +13,23 @@ module.exports = async(page, website) => {
     await page.$eval(selectors.childrenGuests, el => el.value = '1');
     await page.click(selectors.bookInButton);
 
-    await page.waitForXPath("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[1]/input");
-    let checkIn = await page.$x("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[1]/input");
+    await page.waitForXPath(selectors.checkInInputValue);
+    let checkIn = await page.$x(selectors.checkInInputValue);
     let checkInDate = await page.evaluate(el => el.value, checkIn[0]);
     console.log(checkInDate);
 
-    await page.waitForXPath("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[2]/input");
-    let checkOut = await page.$x("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[2]/input");
+    await page.waitForXPath(selectors.checkOutInputValue);
+    let checkOut = await page.$x(selectors.checkOutInputValue);
     let checkOutDate = await page.evaluate(el => el.value, checkOut[0]);
     console.log(checkOutDate);
 
-    await page.waitForXPath("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[1]/div/select");
-    let adults = await page.$x("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[1]/div/select");
+    await page.waitForXPath(selectors.adultsInputValue);
+    let adults = await page.$x(selectors.adultsInputValue);
     let adultsGuests = await page.evaluate(el => el.value, adults[0]);
     console.log(adultsGuests);
 
-    await page.waitForXPath("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[2]/div/select");
-    let children = await page.$x("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[2]/div/select");
+    await page.waitForXPath(selectors.childrenInputValue);
+    let children = await page.$x(selectors.childrenInputValue);
     let childrenGuests = await page.evaluate(el => el.value, children[0]);
     console.log(childrenGuests);
 

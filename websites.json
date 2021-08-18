@@ -11,6 +11,10 @@
         "dates": ".filters-date",
         "rates": ".room-rates-item-price-moy",
         "extras": ".room-rates-item-title-meal-plan",
-        "refundable": ".room-rates-item-info-text"
+        "refundable": ".room-rates-item-info-text",
+        "checkInInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[1]/input",
+        "checkOutInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[2]/input",
+        "adultsInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[1]/div/select",
+        "childrenInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[2]/div/select"
     }
 }]
