@@ -13,6 +13,18 @@ module.exports = async(page, website) => {
     await page.$eval(selectors.childrenGuests, el => el.value = '1');
     await page.click(selectors.bookInButton);
 
+    await page.waitForXPath("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[1]/input");
+    let checkIn = await page.$x("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[1]/input");
+    let checkInDate = await page.evaluate(el => el.value, checkIn[0]);
+    console.log(checkInDate);
+
+    await page.waitForXPath("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[2]/input");
+    let checkOut = await page.$x("/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[2]/input");
+    let checkOutDate = await page.evaluate(el => el.value, checkOut[0]);
+    console.log(checkOutDate);
+
+
+
 
     await page.waitForSelector(selectors.rates);
     await page.evaluate(() => {
@@ -49,11 +61,5 @@ module.exports = async(page, website) => {
         });
         console.log(arrayRefundable);
     });
-
-
-
-
-
-
 
 };
