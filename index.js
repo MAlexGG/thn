@@ -6,14 +6,16 @@ const websites = require('./websites.json');
     try {
         const browser = await puppeteer.launch({ headless: false });
         const page = await browser.newPage();
+        const availabititySearch = {};
+
         await page.setViewport({ width: 1200, height: 720 });
 
         for (const website of websites) {
             const scriptPath = path.join(__dirname, 'scripts', website.scriptName);
-            require(scriptPath)(page, website);
+            await require(scriptPath)(page, website);
         }
 
-        //await browser.close();
+        await browser.close();
     } catch (err) {
         console.log(err);
     }
