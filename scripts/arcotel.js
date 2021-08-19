@@ -63,9 +63,9 @@ module.exports = async(page, website) => {
     await page.waitForSelector(selectors.rates);
     const currency = await page.evaluate(() => {
         const currency = document.querySelector('.room-rates-item-price-moy');
-        //currency.innerText.replace((/\s*\107\s*/ig, ''))
+        const changeCode = currency.innerText.replace(/\s*\u20ac\s*/ig, 'EUR');
+        return currencyCode = changeCode.replace(/[0-9]/g, '');
     });
-    console.log(currency);
 
     function minimunRateAvailable() {
         const onlyRate = [];
@@ -99,15 +99,12 @@ module.exports = async(page, website) => {
     });
 
     await page.exposeFunction('joinArrayResults', () => {
-        const resultList = rates.map((rate, index) => `${rate} - ${extras[index]} - ${refundables[index]}`).concat({ language, checkIn, checkOut, adults, children, totalGuests, minimunRate });
+        const resultList = rates.map((rate, index) => `${rate} - ${extras[index]} - ${refundables[index]}`).concat({ language, checkIn, checkOut, adults, children, totalGuests, minimunRate, currency });
         return resultList;
     });
     const resultList = await page.evaluate(() => {
         return joinArrayResults();
     });
-
-
-
 
     fs.writeFileSync(
         path.join(__dirname, `${website.scriptName}.json`), JSON.stringify(resultList), 'utf8'
