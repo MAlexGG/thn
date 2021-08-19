@@ -1,20 +1,33 @@
 [{
-    "name": "Hotel Arcotel",
-    "url": "https://www.secure-hotel-booking.com/smart/Star-Champs-Elysees/2YXB/es/",
-    "scriptName": "arcotel",
-    "selectors": {
-        "checkIn": "input.check-in-datepicker",
-        "checkOut": "input.check-out-datepicker",
-        "adultsGuests": "select#adults",
-        "childrenGuests": "select#children",
-        "bookInButton": "#applicationHost > div > div.page-background > div.page-main.page-host > header > div.change-filters > div > p > a",
-        "dates": ".filters-date",
-        "rates": ".room-rates-item-price-moy",
-        "extras": ".room-rates-item-title-meal-plan",
-        "refundable": ".room-rates-item-info-text",
-        "checkInInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[1]/input",
-        "checkOutInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[2]/input",
-        "adultsInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[1]/div/select",
-        "childrenInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[2]/div/select"
+        "name": "Hotel Arcotel",
+        "url": "https://www.secure-hotel-booking.com/smart/Star-Champs-Elysees/2YXB/es/",
+        "scriptName": "arcotel",
+        "selectors": {
+            "checkIn": "input.check-in-datepicker",
+            "checkOut": "input.check-out-datepicker",
+            "adultsGuests": "select#adults",
+            "childrenGuests": "select#children",
+            "bookInButton": "#applicationHost > div > div.page-background > div.page-main.page-host > header > div.change-filters > div > p > a",
+            "dates": ".filters-date",
+            "rates": ".room-rates-item-price-moy",
+            "extras": ".room-rates-item-title-meal-plan",
+            "refundable": ".room-rates-item-info-text",
+            "checkInInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[1]/input",
+            "checkOutInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/span[2]/input",
+            "adultsInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[1]/div/select",
+            "childrenInputValue": "/html/body/div[3]/div/div[2]/div[1]/header/div[2]/div/div/div[2]/div/select"
+        }
+    },
+    {
+        "name": "Hotel Condado Barcelona",
+        "url": "https://www.condadohotel.com/",
+        "scriptName": "condado",
+        "selectors": {
+            "infoPopUp": "#popmake-3473 > button",
+            "checkIn": "#datein",
+            "checkOut": "#dateout",
+            "guests": "#adults",
+            "bookInButton": "#bookingBtn"
+        }
     }
-}]
+]

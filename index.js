@@ -6,7 +6,6 @@ const websites = require('./websites.json');
     try {
         const browser = await puppeteer.launch({ headless: false });
         const page = await browser.newPage();
-        const availabititySearch = {};
 
         await page.setViewport({ width: 1200, height: 720 });
 
