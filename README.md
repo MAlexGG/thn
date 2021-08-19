@@ -20,18 +20,18 @@ It has some unit tests that are passing tested from a different file called "uti
 ## Technologies
 ***
 Technologies used within the project:
-Javascript
-Puppeteer
-Jest
-Node.js
-Github
+Javascript - 
+Puppeteer - 
+Jest - 
+Node.js - 
+Github - 
 Chromium
 
 ## Installation
 ***
-Node.js https://nodejs.org/es/download/
-npm install
-npm install puppeteer
+Node.js https://nodejs.org/es/download/ - 
+npm install - 
+npm install puppeteer - 
 npm install jest-puppeteer puppeteer
 
 ## What's next
