@@ -17,42 +17,38 @@ module.exports = async(page, website) => {
     await page.click(selectors.bookInButton);
 
     await page.waitForXPath(selectors.checkInInputValue);
-    let checkIn = await page.$x(selectors.checkInInputValue);
-    let checkInDate = await page.evaluate(el => el.value, checkIn[0]);
-    const checkInJson = JSON.stringify({ checkin: checkInDate });
+    let checkInSelector = await page.$x(selectors.checkInInputValue);
+    let checkInDate = await page.evaluate(el => el.value, checkInSelector[0]);
+    const checkIn = JSON.stringify(checkInDate).replace(/\"/g, '');
 
     await page.waitForXPath(selectors.checkOutInputValue);
-    let checkOut = await page.$x(selectors.checkOutInputValue);
-    let checkOutDate = await page.evaluate(el => el.value, checkOut[0]);
-    const checkOutJson = JSON.stringify({ checkOut: checkOutDate });
+    let checkOutSelector = await page.$x(selectors.checkOutInputValue);
+    let checkOutDate = await page.evaluate(el => el.value, checkOutSelector[0]);
+    const checkOut = JSON.stringify(checkOutDate).replace(/\"/g, '');
 
     await page.waitForXPath(selectors.adultsInputValue);
-    let adults = await page.$x(selectors.adultsInputValue);
-    let adultsGuests = await page.evaluate(el => el.value, adults[0]);
-    const adultsJson = JSON.stringify({ adults: adultsGuests });
+    let adultsSelector = await page.$x(selectors.adultsInputValue);
+    let adultsGuests = await page.evaluate(el => el.value, adultsSelector[0]);
+    const adults = parseInt(adultsGuests);
 
     await page.waitForXPath(selectors.childrenInputValue);
-    let children = await page.$x(selectors.childrenInputValue);
-    let childrenGuests = await page.evaluate(el => el.value, children[0]);
-    const childrenJson = JSON.stringify({ children: childrenGuests });
+    let childrenSelector = await page.$x(selectors.childrenInputValue);
+    let childrenGuests = await page.evaluate(el => el.value, (childrenSelector[0]));
+    let children = parseInt(childrenGuests);
 
-    // await page.exposeFunction('totalGuestsSum', () => {
-    //     totalGuests = String.valueOf(Integer.parseInt(adultsGuests) + Integer.parseInt(childrenGuests));
-    //     return totalGuests;
-    // });
 
-    // const result = await page.evaluate(() => {
-    //     return totalGuestsSum();
-    // });
+    await page.exposeFunction('totalGuestsSum', () => {
+        const guestsSum = adults + children;
+        return guestsSum;
+    });
+    const totalGuests = await page.evaluate(() => {
+        return totalGuestsSum();
+    });
 
-    // totalGuestsSum();
-    // const totalGuestsJson = JSON.stringify({ guests: totalGuestsSum() });
-
-    const lang = await page.evaluate(() => {
+    const language = await page.evaluate(() => {
         const code = document.querySelector('html').lang;
         return code;
     });
-    const langJson = JSON.stringify({ Language: lang });
 
     await page.waitForSelector(selectors.rates);
     const rates = await page.evaluate(() => {
@@ -64,6 +60,13 @@ module.exports = async(page, website) => {
         return arrayRates;
     });
 
+    await page.waitForSelector(selectors.rates);
+    const currency = await page.evaluate(() => {
+        const currency = document.querySelector('.room-rates-item-price-moy');
+        //currency.innerText.replace((/\s*\107\s*/ig, ''))
+    });
+    console.log(currency);
+
     function minimunRateAvailable() {
         const onlyRate = [];
         rates.forEach(rate => {
@@ -73,7 +76,7 @@ module.exports = async(page, website) => {
         const minRate = stringToInt.sort(function(a, b) { return a - b; });
         return minRate[0];
     };
-    console.log(minimunRateAvailable());
+    const minimunRate = minimunRateAvailable();
 
     await page.waitForSelector(selectors.extras);
     const extras = await page.evaluate(() => {
@@ -96,22 +99,18 @@ module.exports = async(page, website) => {
     });
 
     await page.exposeFunction('joinArrayResults', () => {
-        let roomsAvailable = [];
-        for (let i = 0; i < rates.length; i++) {
-            roomsAvailable[i] = { room: rates[i] + " - " + extras[i] + " - " + refundables[i] };
-        }
-        return roomsAvailable;
+        const resultList = rates.map((rate, index) => `${rate} - ${extras[index]} - ${refundables[index]}`).concat({ language, checkIn, checkOut, adults, children, totalGuests, minimunRate });
+        return resultList;
     });
-
     const resultList = await page.evaluate(() => {
         return joinArrayResults();
     });
 
-    let resultSearch = { results: langJson + checkInJson + checkOutJson + adultsJson + childrenJson /* + totalGuestsJson */ }
 
 
-    // fs.writeFileSync(
-    //     path.join(__dirname, `${website.scriptName}.json`), JSON.stringify(totalResults), 'utf8'
-    // );
+
+    fs.writeFileSync(
+        path.join(__dirname, `${website.scriptName}.json`), JSON.stringify(resultList), 'utf8'
+    );
 
 };
